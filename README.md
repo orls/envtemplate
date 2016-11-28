@@ -13,6 +13,17 @@ For example, a simple template might look like:
 ```
 Hello {{ .USER }}! {{ if .HOME }}Your home dir is {{ .HOME }}.{{ else }}You don't appear to have a home dir set.{{ end }}
 ```
+## Install
+
+### from source
+
+Assuming a working go installation, just  `git clone`, `cd` and `go build`. A binary named `envtemplate` should appear.
+
+### prebuilt binary
+
+A binary is attached to each github release. If you're happy to trust that, just fetch it with curl/similar (being sure to follow redirects):
+
+`curl -L https://github.com/orls/envtemplate/releases/download/0.0.1/envtemplate > /usr/bin/envtemplate && chmod +x /usr/bin/envtemplate`
 
 ## Why?
 
