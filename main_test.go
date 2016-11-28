@@ -5,7 +5,11 @@ import "bytes"
 
 func ExampleReadEnvVars() {
   samples := []string{"a=A", "b=b=B", "empty=", "spaces=   "}
-  for k, v := range ReadEnvVars(samples) {
+  envMap := ReadEnvVars(samples)
+  iterOrder := []string{"a", "b", "empty", "spaces"}
+
+  for _, k := range iterOrder {
+    v := envMap[k]
     fmt.Printf("key '%s' has value '%s'\n", k, v)
   }
   // Output: key 'a' has value 'A'
