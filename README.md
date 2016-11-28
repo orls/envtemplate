@@ -4,11 +4,21 @@ A super-lightweight tool for templating config files from environment variables 
 
 ## Usage
 
-$ envtemplate < my-template-file > my-output-file
+`$ envtemplate < my-template-file > my-output-file`
 
-Templating is done by the [go template package](https://golang.org/pkg/text/template/), where the only configured inputs are the process's environment variables.
+Templating is done by the [go template package](https://golang.org/pkg/text/template/), where the only configured variables are the process's environment variables.
 
-It's kind of a hybrid of [gotpl](https://github.com/tsg/gotpl) and [envtpl](https://github.com/andreasjansson/envtpl). It was built for use in docker containers, where it's useful to:
+For example, a simple template might look like:
+
+```
+Hello {{ .USER }}! {{ if .HOME }}Your home dir is {{ .HOME }}.{{ else }}You don't appear to have a home dir set.{{ end }}
+```
+
+## Why?
+
+This was borne out of frustration with using regular shell techniques – heredocs, `sed`, and similar – in various docker image-building and container-runtime configuration arrangements; for many config file formats (hi, nginx!) it starts to become unweildy to manage conditional blocks, escaping, etc.
+
+It is a kind of hybrid of [gotpl](https://github.com/tsg/gotpl) and [envtpl](https://github.com/andreasjansson/envtpl). In the target enviroment of docker container management, it's useful to:
 
 - have small, easily-installable binary tools
     - ...ruling out `envtpl`; the extra docker image bloat of a python+pip install is.... far from zero
