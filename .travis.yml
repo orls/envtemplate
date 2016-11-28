@@ -1,7 +1,9 @@
 language: go
 go:
-- 1.7
-gobuild_args: "-ldflags \"-s -w\""
+  - 1.7
+gobuild_args: "-ldflags \"-s -w\"" # AFAICT, this only affect the implicit `go test ...`
+install:
+  - "go build -ldflags \"-s -w\""
 deploy:
   provider: releases
   api_key:
