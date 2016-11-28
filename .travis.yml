@@ -1,0 +1,12 @@
+language: go
+go:
+- 1.7
+gobuild_args: "-ldflags \"-s -w\""
+deploy:
+  provider: releases
+  api_key:
+    secure: B08epra6aMnwcPdPF7nmSbLR7yvct4EPOpGmVhfsEDeu3HCrAMbmGVfbKzwDRCjivoIzuBgKchfI//svPwYxyzq/x/KUAWg88NnE7fr0lyz8xE/t+VKRfLD+QDmHNXwyIrRC/riRCwvL8hl+BqHr0btXvU9jHPMC5ITSW7lUB/UjId6WD2k+G9ZKPFv+gMfP90DX9sAC4GXMTzD4W5kQBeWPDqWuLFECK9kOKAP/AM+OboEsKhtsf/1GsI4aboCuBxKDmH9OCRB2CR9af4zyQzQE2T47xY5bYRTOpVMNqSUCsQSQRTJDPKwmJnZPB/pM64zQ+6o7UT40F2JwD44Ic7kKkfpf03rytnqKky/2I7idt0Y7ddN6s+24Blz/KjRZYSSJFHwwcHE9MW2l3G8LxsW5WqninYFzY71QL4NVCxKIyJ9SowpYG6Z5POq7rw7wGDKYyDuv/Xs0AOCoxKp2tLvt7LFXUSDdVQFsqp9AOHcWqlovkL3m75cWKJtDNrVd8PbQnePeJpmnhtYgZOM2LdUc7b2cy2SGP45v5XhGOLzdZ5Van/tZxlfMIHj/+/Rtz7rRX58GjEUr/2i/oTczTwrVo9gZTKTP5OYjcWDh37HfKLF08OeMB8NkpECoRKElxyyDepejD+2Mp194DbjtcP4kmA9amdJh0CtNYtnNPfg=
+  file: envtemplate
+  skip_cleanup: true
+  on:
+    tags: true
