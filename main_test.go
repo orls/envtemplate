@@ -25,7 +25,7 @@ func ExampleWriteTemplateToStream_basic() {
     "TARGET_PLANET": "earth",
   }
   WriteTemplateToStream("Hello, {{ .TARGET_PLANET }}!\n", env, buf)
-  WriteTemplateToStream("{{ if not .BEGIN_INVASION}}We mean you no{{ else }}Prepare yourselves for{{ end }} harm.", env, buf)
+  WriteTemplateToStream("{{ if not (exists . \"BEGIN_INVASION\")}}We mean you no{{ else }}Prepare yourselves for{{ end }} harm.", env, buf)
   fmt.Println(buf.String())
   // Output:
   // Hello, earth!
