@@ -1,6 +1,8 @@
 package main
 
 import "bytes"
+
+import "errors"
 import "io"
 import "os"
 import "text/template"
@@ -23,11 +25,29 @@ func ReadEnvVars(rawEnv []string) (environ map[string]string) {
 
 func WriteTemplateToStream(tplSource string, environ map[string]string, outStream io.Writer) {
     tpl := template.New("_root_")
+    tpl.Funcs(template.FuncMap{
+        "split": TplSplitStr,
+    })
     _, err := tpl.Parse(tplSource)
     if err != nil {
         panic(err)
     }
     tpl.Execute(outStream, environ)
+}
+
+func TplSplitStr(args ...interface{}) ([]string, error) {
+    rawValue := args[0].(string)
+    sep := args[1].(string)
+    limit := -1
+    if len(args) > 2 {
+        parsedLimit, ok := args[2].(int)
+        if !ok {
+            err := errors.New("Limit parameter (3rd)is not integer")
+            return nil, err
+        }
+        limit = parsedLimit
+    }
+    return strings.SplitN(rawValue, sep, limit), nil
 }
 
 func main() {
