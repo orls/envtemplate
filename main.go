@@ -5,6 +5,7 @@ import "bytes"
 import "errors"
 import "io"
 import "os"
+import "log"
 import "text/template"
 import "strings"
 
@@ -30,9 +31,12 @@ func WriteTemplateToStream(tplSource string, environ map[string]string, outStrea
     })
     _, err := tpl.Parse(tplSource)
     if err != nil {
-        panic(err)
+        log.Fatal(err)
     }
-    tpl.Execute(outStream, environ)
+    err = tpl.Execute(outStream, environ)
+    if err != nil {
+        log.Fatal(err)
+    }
 }
 
 func TplSplitStr(args ...interface{}) ([]string, error) {
