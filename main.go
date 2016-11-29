@@ -29,6 +29,7 @@ func WriteTemplateToStream(tplSource string, environ map[string]string, outStrea
     tpl.Funcs(template.FuncMap{
         "split": TplSplitStr,
     })
+    tpl.Option("missingkey=error")
     _, err := tpl.Parse(tplSource)
     if err != nil {
         log.Fatal(err)
